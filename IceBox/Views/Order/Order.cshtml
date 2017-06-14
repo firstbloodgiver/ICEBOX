@@ -7,6 +7,7 @@
 
 }
 <link rel="stylesheet" type="text/css" href="lib/css/cart-style.css">
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <!--------------------------------------------------->
 @section Scripts
 {
@@ -236,31 +237,33 @@
             <tr style="width:100%">
                 <td id="leftSide" style="width:18%;text-align:left;vertical-align:top;">
                     <ol style="margin-top:60px">
-                        <li id="s1" style="background:#BEBEBE;"><a href="javascript: step1();">确认联系信息</a></li>
-                        <li id="s2" style="background:white;"><a href="javascript: step2();">输入送货信息</a></li>
+                        <li id="s1" style="background:#BEBEBE;"><a href="javascript: step1();">用户须知</a></li>
+                        <li id="s2" style="background:white;"><a href="javascript: step2();">确认购买信息</a></li>
                         <li id="s3" style="background:white;"><a href="javascript: step3();">选择付款方式</a></li>
                         <li id="s4" style="background:white;"><a href="javascript: step4();">确认订单</a></li>
                     </ol>
                 </td>
                 <td id="contentPages" style="width:82%;text-align:center;">
-                    <div id="contactInfo" style="display:block;">
-                        <h3>用户须知</h3>
+                    <div class="col-lg-offset-6" id="contactInfo" style="display:block;">
+                        <h3 class="col-lg-offset-4 text-center">用户须知</h3>
+                        <iframe src="~/img/用户须知.pdf" frameborder="0" id="pdfContainer" name="pdfContainer" width="450" height="380" onLoad="iFrameHeight()"></iframe>
+
                         @Html.HiddenFor(m => m.curCustomer.TheCustomerType)
                         @Html.HiddenFor(m => m.curCustomer.ObjId)
                         <input id="step1next" type="button" value="下一步" onclick="javascript: step2();" />
                     </div>
-                    <div id="receiverInfo" style="display:none;">
-                        <h3>输入订单信息</h3>
+                    <div id="receiverInfo"  class="col-lg-offset-6"style="display:none;">
+                        <h3>确认购买信息</h3>
                         <table border="1" style="border-width:1px;border-collapse:collapse;width:100%;">
                             @foreach (var cartItem in Model.orders)
                             {
                                 <tr>
-                                    <td>订单<span>@orderNo</span></td>
+                                    
                                     <td style="text-align:left;width:300px;">
                                         游戏名称：<span>@Model.orders[orderNo].productName</span><br />
                                         游戏描述：<span>@Model.orders[orderNo].productFeature</span><br />
                                         市场价格：<span>@Model.orders[orderNo].price</span><br />
-                                        <img src="/Images/@Model.orders[orderNo].smallImg" style="width:150px" /><br />
+                                        <img src="~/@Model.orders[orderNo].smallImg" style="width:150px" /><br />
                                         购买价格：<span>@Model.orders[orderNo].realPrice</span><br />
                                         <input type="hidden" name="productId_@orderNo" value="@Model.orders[orderNo].theProduct" />
                                         <input type="hidden" name="realPrice_@orderNo" value="@Model.orders[orderNo].realPrice" />
@@ -272,19 +275,19 @@
                         <input id="step2last" type="button" value="上一步" onclick="javascript: step1();" />
                         <input id="step2next" type="button" value="下一步" onclick="javascript: step3();" />
                     </div>
-                    <div id="paymentInfo" style="display:none;">
+                    <div  class="col-lg-offset-6"id="paymentInfo" style="display:none;">
                         <h3>选择付款方式</h3>
                         <span>（付款金额：@Model.payment.Amount 元）</span><br /><br />
                         <input type="hidden" name="paymentAmt" value="@Model.payment.Amount" />
                         <input type="hidden" id="paymentType" name="paymentType" value="-1" />
                         @foreach (var p in ViewBag.payments)
                         {
-                            <span><input type="radio" name="pType" id="pt_@p.ObjId" value="@p.ObjId" title="@p.TypeName" onclick="javascript:paymentTypeSelected(this);" /><a href="javascript:selePaymentType(@p.ObjId,'@p.TypeName');"><img src="/Images/@p.SmallImg" style="width:120px;height:30px; vertical-align:middle;" /></a></span><br />
+                            <span><input type="radio" name="pType" id="pt_@p.ObjId" value="@p.ObjId" title="@p.TypeName" onclick="javascript:paymentTypeSelected(this);" /><a href="javascript:selePaymentType(@p.ObjId,'@p.TypeName');"><img src="~/images/@p.SmallImg" style="width:120px;height:30px; vertical-align:middle;" /></a></span><br />
                         }<br />
                         <input id="step3last" type="button" value="上一步" onclick="javascript: step2();" />
                         <input id="step3next" type="button" value="下一步" onclick="javascript: step4();" />
                     </div>
-                    <div id="assureInfo" style="display:none;">
+                    <div  class="col-lg-offset-2"id="assureInfo" style="display:none;">
                         <h3>确认订单</h3>
                         <table border="1" style="width:100%;border: 1px solid black;text-align:left;border-width:1px;border-collapse:collapse;">
                             <tr>

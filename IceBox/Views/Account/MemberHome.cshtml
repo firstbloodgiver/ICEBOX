@@ -111,40 +111,63 @@
         width: 200px;
         font-weight: bold;
     }
+    .psw input[type="password"] {
+        outline: none;
+        font-size: 15px;
+        font-weight: 500;
+        color: #818181;
+        padding: 1px 20px;
+        background-color: #cacaca;
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        margin: 0px 0px 12px 0px;
+        width: 200px;
+    }
+    
+    
 </style>
+
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active">
+        <a role="tab"href="#home" data-toggle="tab">
+            会员中心
+        </a>
+    </li>
+    <li><a role="tab" href="#ios" data-toggle="tab">订单信息</a></li>
+</ul>
 <div>
-    <table style="width: 100%; height: 688px;">
-        <tr>
-            <td style="width: 297px;vertical-align:top;">
-                <h3>会员信息</h3>
+    <div class="tab-content col-sm-12"style="width: 100%; height: 688px;">
+        @*<tr>*@
+            <div class="tab-pane fade in active psw" id="home" >
+                <h3 style="text-align:center">会员信息</h3>
                 <input type="hidden" id="userId" value="@ViewBag.uid" />
-                <table border="1" style="border-collapse:collapse;">
+                <table  border="1" style="border-collapse:collapse;margin-left:480px">
                     <tr>
-                        <td style="width: 70px;text-align:right;">移动电话 </td>
+                        <td style="width: 100px;text-align:right;font-size:x-large;" >移动电话 </td>
                         <td style="width: 158px;text-align:left;">
-                            <input type="text" id="memberMobile" name="memberMobile" readOnly="true" style="Width:156px;border:none;" value="@Model.CustomerInfo.MobilePhone" />
+                            <input type="text" id="memberMobile" name="memberMobile" readOnly="true" style="Width:220px;border:none;" value="@Model.CustomerInfo.MobilePhone" />
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 70px;text-align:right;">办公电话 </td>
+                        <td style="width: 70px;text-align:right;font-size:x-large;">办公电话 </td>
                         <td style="width: 158px;text-align:left;">
-                            <input type="text" id="memberOffice" name="memberOffice" readOnly="true" style="Width:156px;border:none;" value="@Model.CustomerInfo.OfficePhone" />
+                            <input type="text" id="memberOffice" name="memberOffice" readOnly="true" style="Width:220px;border:none;" value="@Model.CustomerInfo.OfficePhone" />
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 70px;text-align:right;">家庭电话 </td>
+                        <td style="width: 70px;text-align:right;font-size:x-large;">家庭电话 </td>
                         <td style="width: 158px;text-align:left;">
-                            <input type="text" id="memberHome" name="memberHome" readOnly="true" style="Width:156px;border:none;" value="@Model.CustomerInfo.HomePhone" />
+                            <input type="text" id="memberHome" name="memberHome" readOnly="true" style="Width:220px;border:none;" value="@Model.CustomerInfo.HomePhone" />
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 70px;text-align:right;">QQ号码 </td>
+                        <td style="width: 70px;text-align:right;font-size:x-large;">QQ号码 </td>
                         <td style="width: 158px;text-align:left;">
-                            <input type="text" id="memberQQ" name="memberQQ" readOnly="true" style="Width:156px;border:none" value="@Model.CustomerInfo.QqNum" />
+                            <input type="text" id="memberQQ" name="memberQQ" readOnly="true" style="Width:220px;border:none" value="@Model.CustomerInfo.QqNum" />
                         </td>
                     </tr>
                 </table><br />
-                <input type="button" ID="btnModiInfo" value="修改信息" onclick="javascript: modiInfo();" />
+                <input style="margin-left:480px" type="button" ID="btnModiInfo" value="修改信息" onclick="javascript: modiInfo();" />
                 <input type="button" ID="btnModiPWD" value="修改密码" onclick="javascript: modiPWD();" /><br /><br />
                 <form id="baseInfo" class="col-md-12" asp-controller="Account" asp-action="MemberHome" method="post">
                     <div id="pwdBlk" style="display:@ViewBag.pwdDisp">
@@ -172,14 +195,14 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-10">
-                                <button type="submit" class="btn btn-default">提交新密码</button>
+                                <button style="margin-left:480px" type="submit" class="btn btn-default">提交新密码</button>
                             </div>
                         </div>
                     </div>
                 </form>
-            </td>
-            <td style="vertical-align:top;">
-                <h3>订单一览</h3>
+            </div>
+            <div class="tab-pane fade" id="ios" style="vertical-align:top;">
+                <h3 style="text-align:left">订单一览</h3>
                 <table border="1" style="border-width:1px;border-collapse:collapse;width:100%;">
                     <tr>
                         <th>订单时间</th>
@@ -205,7 +228,7 @@
                     }
                 </table>
                 <div page-model="@Model.PagingInfo" page-action="MemberHome"></div>
-            </td>
-        </tr>
-    </table>
+            </div>
+        @*</tr>*@
+    </div>
 </div>
